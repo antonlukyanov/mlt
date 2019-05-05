@@ -5,5 +5,6 @@ Common file system utilities.
 import os
 
 
-def makedirs(dirpath):
-    os.makedirs(dirpath, 0o700, True)
+def makedirs(dirpaths):
+    for dirpath in dirpaths:
+        os.makedirs(dirpath, 0o700, True)
