@@ -13,7 +13,7 @@ def allow_growth_config():
 
 
 def allow_growth_session():
-    return tf.Session(config=allow_growth_config)
+    return tf.Session(config=allow_growth_config())
 
 
 def select_gpus(devices):

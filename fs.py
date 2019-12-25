@@ -5,8 +5,10 @@ Common file system utilities.
 import os
 
 
-def makedirs(dirpaths, mode=0o700):
-    if isinstance(dirpaths, str):
-        dirpaths = [dirpaths]
-    for dp in dirpaths:
-        os.makedirs(dp, mode, True)
+def makedirs(*args, mode=0o700):
+    for path in args:
+        if isinstance(path, list) or isinstance(path, tuple):
+            for dp in path:
+                os.makedirs(dp, mode, True)
+        else:
+            os.makedirs(path, mode, True)
