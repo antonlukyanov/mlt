@@ -24,4 +24,7 @@ def select_gpus(devices):
         devices = [devices]
     os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
     if devices:
-        os.environ['CUDA_VISIBLE_DEVICES'] = ','.join(str(device) for device in devices)
+        devices = ','.join(str(device) for device in devices)
+    else:
+        devices = ''
+    os.environ['CUDA_VISIBLE_DEVICES'] = devices
