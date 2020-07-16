@@ -20,7 +20,7 @@ def select_gpus(devices):
     tp = type(devices)
     if tp == range:
         devices = list(devices)
-    elif tp not in (list, tuple):
+    elif tp is not None and tp not in (list, tuple):
         devices = [devices]
     os.environ['CUDA_DEVICE_ORDER'] = 'PCI_BUS_ID'
     if devices:
