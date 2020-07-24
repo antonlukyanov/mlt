@@ -1,10 +1,12 @@
 """
 Miscellaneous utilities.
 """
-
+import json
 from functools import partial
 from time import time
 from datetime import datetime, timedelta
+
+import yaml
 
 
 class Timer:
@@ -34,3 +36,13 @@ class Timer:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.stop()
+
+
+def read_json(filepath):
+    with open(filepath) as f:
+        return json.load(f)
+
+
+def read_yaml(filepath):
+    with open(filepath) as f:
+        return yaml.load(f, Loader=yaml.SafeLoader)
