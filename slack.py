@@ -1,13 +1,13 @@
 import os
 from os import path
 
-import mlt.misc
+from . import misc
 from slack import WebClient
 from slack.errors import SlackApiError
 
 
 class Messenger:
-    client = WebClient(token=mlt.misc.read_json(
+    client = WebClient(token=misc.read_json(
         path.join(os.getcwd(), 'slack.json')
     )['SLACK_API_TOKEN'])
 
