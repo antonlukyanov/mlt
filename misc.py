@@ -45,4 +45,4 @@ def read_json(filepath):
 
 def read_yaml(filepath):
     with open(filepath) as f:
-        return yaml.load(f, Loader=yaml.SafeLoader)
+        return yaml.load(f, Loader=yaml.FullLoader)
