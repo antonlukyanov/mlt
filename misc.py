@@ -10,25 +10,29 @@ import yaml
 
 
 class Timer:
-    def __init__(self, *, name=None, log=None):
+    def __init__(self, *, name=None, log=print):
         self._started = None
         self._stopped = None
         self._name = name if name else 'timer'
-        self._log = log if log else print
-        self._log = partial(self._log, '[%s]:' % self._name)
+        self._log = partial(log, '[%s]:' % self._name) if log is not None else log
 
     def start(self):
         self._started = time()
         self._stopped = None
-        self._log('started at', datetime.fromtimestamp(self._started))
+        self.log('started at', datetime.fromtimestamp(self._started))
+        return self._started
 
     def stop(self):
         self._stopped = time()
-        self._log('finished at %s, time elapsed %s' % (
-                datetime.fromtimestamp(self._stopped),
-                timedelta(seconds=self._stopped - self._started)
-            )
-        )
+        finished = datetime.fromtimestamp(self._stopped)
+        elapsed_sec = self._stopped - self._started
+        elapsed = timedelta(elapsed_sec)
+        self.log(f'finished at {finished}, time elapsed {elapsed}')
+        return self._stopped, elapsed_sec
+
+    def log(self, *args, **kwargs):
+        if self._log is not None:
+            self._log(*args, **kwargs)
 
     def __enter__(self):
         self.start()
